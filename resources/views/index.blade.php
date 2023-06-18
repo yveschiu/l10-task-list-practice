@@ -19,10 +19,9 @@
             @endforelse
         </ul>
 
-
         @if ($tasks->count())
             <nav>
-                {{ $tasks->links() }}}
+                {{ $tasks->links() }}
             </nav>
         @endif
     </div>
