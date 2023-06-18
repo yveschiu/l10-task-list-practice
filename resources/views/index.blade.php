@@ -20,7 +20,7 @@
         <ul>
             @forelse ($tasks as $task)
                 <li>
-                    <a href="{{ route('tasks.show', ['id' => $task->id]) }}">
+                    <a href="{{ route('tasks.show', ['task' => $task->id]) }}">
                         {{ $task->title }}
                     </a>
                 </li>

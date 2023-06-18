@@ -5,14 +5,14 @@
 @section('styles')
     <style>
         /* .error-message {
-                                color: red;
-                                font-size: 0.8rem;
-                            } */
+                                        color: red;
+                                        font-size: 0.8rem;
+                                    } */
     </style>
 @endsection
 
 @section('content')
-    <form method='POST' action="{{ route('tasks.store') }}">
+    <form method='POST' action="{{ route('tasks.update', ['task' => $task->id]) }}">
         @csrf
         @method('PUT')
         <div>

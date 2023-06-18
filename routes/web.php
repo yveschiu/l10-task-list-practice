@@ -36,11 +36,11 @@ Route::get('/tasks/{task}/edit', function (Task $task) {
     ]);
 })->name('tasks.edit');
 
-Route::get('/tasks/{id}', function ($id) {
+Route::get('/tasks/{task}', function (Task $task) {
     // The findOrFail and firstOrFail methods will retrieve the first result of the query; however, if no result is found, an Illuminate\Database\Eloquent\ModelNotFoundException will be thrown:
     // If the ModelNotFoundException is not caught, a 404 HTTP response is automatically sent back to the client:
     return view('show', [
-        'task' => Task::findOrFail($id),
+        'task' => $task,
     ]);
 })->name('tasks.show');
 
@@ -65,7 +65,24 @@ Route::post('/tasks', function (Request $request) {
         ->with('success', 'Task created successfully.');
 })->name('tasks.store');
 
-
+Route::put('/tasks/{task}', function (Task $task, Request $request) {
+    $data = $request->validate(
+        [
+            'title' => 'required|max:255',
+            'description' => 'required|max:255',
+            'long_description' => 'required|max:255',
+            'completed' => 'nullable',
+        ]
+    );
+    $task->title = $data['title'];
+    $task->description = $data['description'];
+    $task->long_description = $data['long_description'];
+    $task->completed = $data['completed'] ?? $task->completed;
+    $task->save();
+    return redirect()
+        ->route('tasks.show', $task->id)
+        ->with('success', 'Task updated successfully.');
+})->name('tasks.update');
 
 Route::fallback(function () {
     return 'Sorry, the page you are looking for could not be found.';
