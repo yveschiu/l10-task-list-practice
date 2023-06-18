@@ -3,6 +3,9 @@
 @section('title', 'The list of tasks')
 
 @section('content')
+    <button>
+        <a href="{{ route('tasks.create') }}">Create new task</a>
+    </button>
     <div>
         {{-- @if (count($tasks))
             <ul>
@@ -29,9 +32,6 @@
             @endforelse
         </ul>
 
-        <button>
-            <a href="{{ route('tasks.create') }}">Create new task</a>
-        </button>
 
         @if ($tasks->count())
             <nav>
