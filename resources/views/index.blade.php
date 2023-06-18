@@ -28,5 +28,15 @@
                 <p>no tasks</p>
             @endforelse
         </ul>
+
+        <button>
+            <a href="{{ route('tasks.create') }}">Create new task</a>
+        </button>
+
+        @if ($tasks->count())
+            <nav>
+                {{ $tasks->links() }}}
+            </nav>
+        @endif
     </div>
 @endsection
